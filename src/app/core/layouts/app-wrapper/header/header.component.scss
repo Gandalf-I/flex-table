@@ -1,0 +1,26 @@
+.header-wrap {
+  background: #e7e7e7;
+
+  .header {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 100px;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    .nav {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: center;
+
+      .link {
+        font-size: 20px;
+        font-weight: 700;
+        padding: 20px;
+        display: grid;
+      }
+    }
+  }
+}

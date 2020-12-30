@@ -23,6 +23,6 @@ export class AuthService {
 
   logout() {
     this.cookie.delete('token');
-    this.router.navigate(['auth']);
+    this.router.navigate(['login']);
   }
 }

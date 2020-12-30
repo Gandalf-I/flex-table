@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { OnlyAuthGuard } from '@core/guards/only-auth.guard';
+import { AppWrapperComponent } from '@layouts/app-wrapper/app-wrapper.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [OnlyAuthGuard],
+    component: AppWrapperComponent,
     children: [
       {
         path: 'publication',
