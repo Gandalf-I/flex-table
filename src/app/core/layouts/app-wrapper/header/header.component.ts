@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import {PublicationService} from '@core/services/publication.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,16 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private publication: PublicationService) { }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.auth.logout();
+  }
+
+  reset() {
+    this.publication.resetPublications();
   }
 }
