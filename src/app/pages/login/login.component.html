@@ -5,14 +5,14 @@
       <nz-form-control [nzErrorTip]="'Invalid email!'"
                        [nzHasFeedback]="!loginForm.errors?.email">
         <nz-input-group nzPrefixIcon="mail">
-          <input type="text" nz-input formControlName="email" placeholder="Email"/>
+          <input type="text" nz-input formControlName="email" placeholder="admin@admin.com"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your password!" [nzHasFeedback]="!loginForm.errors?.password">
         <nz-input-group nzPrefixIcon="lock">
-          <input type="password" nz-input formControlName="password" placeholder="Password"/>
+          <input type="password" nz-input formControlName="password" placeholder="admin"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>

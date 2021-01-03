@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PublicationEditComponent } from '@pages/publication/publication-edit/publication-edit.component';
+import { TableSettingsComponent } from '@pages/publication/table-settings/table-settings.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PublicationEditComponent,
+    component: TableSettingsComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PublicationEditRoutingModule { }
+export class TableSettingsRoutingModule { }

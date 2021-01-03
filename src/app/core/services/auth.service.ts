@@ -9,7 +9,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
-  constructor(private message: NzMessageService, private router: Router, private cookie: CookieService) { }
+  constructor(private message: NzMessageService,
+              private router: Router,
+              private cookie: CookieService,
+              ) { }
 
   login({ email, password }: LoginForm): void {
     if (email === 'admin@admin.com' && password === 'admin') {

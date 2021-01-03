@@ -20,6 +20,8 @@
       "es2018",
       "dom"
     ],
+     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@shared/*": [ "src/app/shared/*"],
       "@components/*": [ "src/app/components/*"],
@@ -34,6 +36,7 @@
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "types" : ["node"],
   }
 }
