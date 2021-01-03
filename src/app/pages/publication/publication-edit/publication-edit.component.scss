@@ -1,0 +1,13 @@
+.form {
+  .form-item {
+    display: grid;
+
+    .label {
+      text-align: start;
+    }
+  }
+
+  .button {
+    width: 100%;
+  }
+}

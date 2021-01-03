@@ -1,1 +1,28 @@
-<p>publication-edit works!</p>
+<nz-drawer
+  [nzWidth]="320"
+  [nzVisible]="true"
+  nzTitle="Publication"
+  (nzOnClose)="close()"
+  [nzFooter]="footerTpl"
+>
+  <form *nzDrawerContent nz-form [formGroup]="form" (ngSubmit)="save()" class="form">
+    <ng-container *ngFor="let field of fields">
+      <nz-form-item *ngIf="field?.type && field?.name" class="form-item">
+        <nz-form-label class="label">
+          {{field?.name}}
+        </nz-form-label>
+        <nz-form-control>
+          <app-flex-inputs [type]="field?.type!" [formControlName]="field?.fieldId!"></app-flex-inputs>
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
+    <button nz-button nzType="primary" class="button">Save</button>
+  </form>
+
+  <ng-template #footerTpl>
+    <ng-container *ngIf="form.valueChanges | async as values">
+      <pre>{{values | json}}</pre>
+    </ng-container>
+  </ng-template>
+</nz-drawer>
+

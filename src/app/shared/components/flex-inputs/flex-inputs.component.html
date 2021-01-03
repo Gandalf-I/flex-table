@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="type">
+
+  <ng-container *ngSwitchCase="InputType.Datetime">
+    <nz-date-picker [(ngModel)]="value" [disabled]="disabled"></nz-date-picker>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <input nz-input [(ngModel)]="value" [disabled]="disabled"/>
+  </ng-container>
+
+</ng-container>

@@ -1,2 +1,31 @@
-<p>publication works!</p>
+<ng-container *ngIf="publication.publicationValuesAsync | async as publications">
+  <ng-container *ngIf="publication.publicationColumns$ | async as columns">
+    <div class="publication-table">
+      <nz-table #table
+                [nzData]="publications"
+                nzTableLayout="fixed"
+                (nzQueryParams)="onQueryParamsChange($event)">
+        <thead>
+        <tr>
+          <ng-container *ngFor="let column of columns | filterVisibleColumn : visibleFieldsId">
+            <th
+              [nzSortFn]="true"
+              [nzColumnKey]="column.fieldId">
+              {{ column.name }}
+            </th>
+          </ng-container>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="pointer" *ngFor="let publication of table.data" [routerLink]="[publication.id]">
+          <td *ngFor="let column of publication.data | filterVisibleColumn : visibleFieldsId | sortByPriority : visibleFieldsId">
+            {{ column?.value }}
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-container>
+</ng-container>
+
 <router-outlet></router-outlet>

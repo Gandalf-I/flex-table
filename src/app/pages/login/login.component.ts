@@ -15,14 +15,14 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.getInitLoginForm();
   }
 
+  ngOnInit(): void {
+  }
+
   private getInitLoginForm(): FormGroup {
     return this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],
     });
-  }
-
-  ngOnInit(): void {
   }
 
   submitForm() {

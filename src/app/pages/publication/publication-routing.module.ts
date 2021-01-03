@@ -8,6 +8,10 @@ const routes: Routes = [
     component: PublicationComponent,
     children: [
       {
+        path: 'settings',
+        loadChildren: () => import('./table-settings/table-settings.module').then(m => m.TableSettingsModule),
+      },
+      {
         path: ':id',
         loadChildren: () => import('./publication-edit/publication-edit.module').then(m => m.PublicationEditModule),
       },
