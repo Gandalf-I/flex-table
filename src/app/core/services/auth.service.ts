@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginForm } from '@pages/login/utils/interface/login-form';
+import { LoginForm } from '@pages/login/shared/interface/login-form';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
