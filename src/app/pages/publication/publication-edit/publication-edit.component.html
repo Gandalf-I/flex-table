@@ -2,10 +2,10 @@
   [nzWidth]="320"
   [nzVisible]="true"
   nzTitle="Publication"
-  (nzOnClose)="close()"
+  (nzOnClose)="onClose()"
   [nzFooter]="footerTpl"
 >
-  <form *nzDrawerContent nz-form [formGroup]="form" (ngSubmit)="save()" class="form">
+  <form *nzDrawerContent nz-form [formGroup]="form" (ngSubmit)="onSave()" class="form">
     <ng-container *ngFor="let field of fields">
       <nz-form-item *ngIf="field?.type && field?.name" class="form-item">
         <nz-form-label class="label">

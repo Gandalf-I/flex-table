@@ -9,31 +9,31 @@ import { AuthService } from '@core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+  form!: FormGroup;
 
   constructor(private fb: FormBuilder, private auth: AuthService) {
-    this.loginForm = this.getInitLoginForm();
   }
 
   ngOnInit(): void {
+    this.initForm();
   }
 
-  private getInitLoginForm(): FormGroup {
+  private initForm(): FormGroup {
     return this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
-  submitForm() {
-    if (this.loginForm.invalid) {
-      for (const i in this.loginForm.controls) {
-        this.loginForm.controls[i].markAsDirty();
-        this.loginForm.controls[i].updateValueAndValidity();
+  public submitForm() {
+    if (this.form.invalid) {
+      for (const i in this.form.controls) {
+        this.form.controls[i].markAsDirty();
+        this.form.controls[i].updateValueAndValidity();
       }
       return;
     }
 
-    this.auth.login(this.loginForm.value);
+    this.auth.login(this.form.value);
   }
 }

@@ -7,7 +7,6 @@ import { publicationMetadataMock } from '@app/mock/publication.metadata';
 import { NzTableSortOrder } from 'ng-zorro-antd/table';
 import { SortEnum } from '@shared/enums/sort.enum';
 import { Field } from '@shared/interfaces/field';
-
 import cloneDeep from 'clone-deep';
 
 interface Filter {
@@ -42,7 +41,7 @@ export class PublicationService {
   constructor() {
   }
 
-  initPublications(): boolean {
+  public initPublications(): boolean {
 
     if (this.checkPublicationContain()) {
       this.setPublications();
@@ -53,11 +52,11 @@ export class PublicationService {
     return true;
   }
 
-  resetPublications(): void {
+  public resetPublications(): void {
     this.setMockPublications();
   }
 
-  sortPublication(filters: Filter[]) {
+  public sortPublication(filters: Filter[]) {
     let publications = cloneDeep(this.publicationValues);
 
     for (const [i, filter] of filters.entries()) {
@@ -75,7 +74,7 @@ export class PublicationService {
     this.publicationValues = publications;
   }
 
-  columnSort(a: number | string, b: number | string): number {
+  public columnSort(a: number | string, b: number | string): number {
     if (typeof b === 'number' && typeof a === 'number') {
       return a - b;
     }
@@ -83,18 +82,11 @@ export class PublicationService {
     return (a as string).toLocaleLowerCase() > (b as string).toLocaleLowerCase() ? 1 : -1;
   }
 
-  checkPublicationContain(): boolean {
+  public checkPublicationContain(): boolean {
     return !!(localStorage.getItem('publication') && localStorage.getItem('metadata'));
   }
 
-  sortRowTable() {
-    const rows = this.publicationColumns$.value
-      .sort((a, b) => a.priority - b.priority);
-
-    this.publicationColumns$.next(rows);
-  }
-
-  getPublicationFieldsWithMetadata(id: number): FieldWithMetadata[] {
+  public getPublicationFieldsWithMetadata(id: number): FieldWithMetadata[] {
     const fields = this.publicationValues.find(v => v.id === id)?.data;
     if (!fields?.length) {
       return [];
@@ -116,16 +108,16 @@ export class PublicationService {
     });
   }
 
-  getPublication(id: number): Publication {
+  public getPublication(id: number): Publication {
     return <Publication> this.publicationValues.find(v => v.id === id);
   }
 
-  putPublication(publication: Publication): void {
+  public putPublication(publication: Publication): void {
     this.publicationValues = this.publicationValues
       .map(v => v.id === publication.id ? publication : v);
   }
 
-  putMetadata(editedMetadata: PublicationMetadata[]) {
+  public putMetadata(editedMetadata: PublicationMetadata[]) {
     localStorage.setItem('metadata', JSON.stringify(editedMetadata));
     this.publicationColumns$.next(editedMetadata);
   }

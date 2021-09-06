@@ -50,11 +50,11 @@ export class TableSettingsComponent implements OnInit {
     });
   }
 
-  close() {
+  onClose() {
     this.router.navigate(['../']);
   }
 
-  save() {
+  onSave() {
     for (const i in this.form.controls) {
       this.form.controls[i].markAsDirty();
       this.form.controls[i].updateValueAndValidity();
@@ -70,20 +70,14 @@ export class TableSettingsComponent implements OnInit {
     this.publicationService.putMetadata(editedMetadata);
 
     this.message.success('Complete save!');
-    this.close();
+    this.onClose();
   }
 
   getEdited(): PublicationMetadata[] {
 
-    const columnsMetadata = this.columnsMetadata
-      .map(
-        (metadata) => {
-          return { ...metadata, ...this.form.get(metadata.fieldCode)?.value };
-        },
-      );
-
-    console.log('Send', this.columnsMetadata);
-
-    return columnsMetadata;
+    return this.columnsMetadata
+      .map((metadata) => {
+        return { ...metadata, ...this.form.get(metadata.fieldCode)?.value };
+      });
   }
 }

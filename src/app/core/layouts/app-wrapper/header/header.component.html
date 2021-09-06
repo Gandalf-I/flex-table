@@ -5,13 +5,13 @@
         Publication
       </a>
     </nav>
-    <a nz-button nzType="primary" [routerLink]="['/publication', 'settings']">
+    <a nz-button nzType="primary" [routerLink]="['/', 'publication', 'settings']">
       <span>Settings</span>
     </a>
-    <button nz-button nzType="default" nzDanger (click)="reset()">
+    <button nz-button nzType="default" nzDanger (click)="onReset()">
       <span>Reset</span>
     </button>
-    <button nz-button nzType="primary" nzDanger (click)="logout()">
+    <button nz-button nzType="primary" nzDanger (click)="onLogout()">
       <span>Logout</span>
     </button>
   </div>
