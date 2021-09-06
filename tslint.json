@@ -3,6 +3,9 @@
     "tslint-config-airbnb"
   ],
   "rules": {
+    "deprecation": {
+      "severity": "warning"
+    },
     "max-line-length": false
   },
   "rulesDirectory": [

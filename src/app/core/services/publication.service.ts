@@ -7,9 +7,7 @@ import { publicationMetadataMock } from '@app/mock/publication.metadata';
 import { NzTableSortOrder } from 'ng-zorro-antd/table';
 import { SortEnum } from '@shared/enums/sort.enum';
 import { Field } from '@shared/interfaces/field';
-
 import cloneDeep from 'clone-deep';
-import moment from 'moment';
 
 interface Filter {
   key: string;
@@ -43,7 +41,7 @@ export class PublicationService {
   constructor() {
   }
 
-  initPublications(): boolean {
+  public initPublications(): boolean {
 
     if (this.checkPublicationContain()) {
       this.setPublications();
@@ -54,14 +52,14 @@ export class PublicationService {
     return true;
   }
 
-  resetPublications(): void {
+  public resetPublications(): void {
     this.setMockPublications();
   }
 
-  sortPublication(filters: Filter[]) {
+  public sortPublication(filters: Filter[]) {
     let publications = cloneDeep(this.publicationValues);
 
-    for (const filter of filters) {
+    for (const [i, filter] of filters.entries()) {
       if (!filter.value) {
         continue;
       }
@@ -69,42 +67,26 @@ export class PublicationService {
 
       publications =
         publications.sort(
-          (a: Publication, b: Publication) =>
-            sortType *
-            this.columnSort(
-              this.findByField(a.data, 'fieldId', filter.key).value,
-              this.findByField(b.data, 'fieldId', filter.key).value,
-            ),
+          (a: Publication, b: Publication) => sortType * this.columnSort(a.data[i].value, b.data[i].value),
         );
     }
 
     this.publicationValues = publications;
   }
 
-  findByField(arr: any[], field: string, value: any): any {
-    return arr.find((v => v[field] === value));
-  }
-
-  columnSort(a: string, b:  string): number {
-    if (moment(a).isValid() && moment(b).isValid()) {
-      return moment(a).valueOf() - moment(b).valueOf();
+  public columnSort(a: number | string, b: number | string): number {
+    if (typeof b === 'number' && typeof a === 'number') {
+      return a - b;
     }
 
-    return a > b ? 1 : - 1;
+    return (a as string).toLocaleLowerCase() > (b as string).toLocaleLowerCase() ? 1 : -1;
   }
 
-  checkPublicationContain(): boolean {
+  public checkPublicationContain(): boolean {
     return !!(localStorage.getItem('publication') && localStorage.getItem('metadata'));
   }
 
-  sortRowTable() {
-    const rows = this.publicationColumns$.value
-      .sort((a, b) => a.priority - b.priority);
-
-    this.publicationColumns$.next(rows);
-  }
-
-  getPublicationFieldsWithMetadata(id: number): FieldWithMetadata[] {
+  public getPublicationFieldsWithMetadata(id: number): FieldWithMetadata[] {
     const fields = this.publicationValues.find(v => v.id === id)?.data;
     if (!fields?.length) {
       return [];
@@ -126,16 +108,16 @@ export class PublicationService {
     });
   }
 
-  getPublication(id: number): Publication {
+  public getPublication(id: number): Publication {
     return <Publication> this.publicationValues.find(v => v.id === id);
   }
 
-  putPublication(publication: Publication): void {
+  public putPublication(publication: Publication): void {
     this.publicationValues = this.publicationValues
       .map(v => v.id === publication.id ? publication : v);
   }
 
-  putMetadata(editedMetadata: PublicationMetadata[]) {
+  public putMetadata(editedMetadata: PublicationMetadata[]) {
     localStorage.setItem('metadata', JSON.stringify(editedMetadata));
     this.publicationColumns$.next(editedMetadata);
   }

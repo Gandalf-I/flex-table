@@ -2,9 +2,9 @@
   [nzWidth]="320"
   [nzVisible]="true"
   nzTitle="Settings"
-  (nzOnClose)="close()"
+  (nzOnClose)="onClose()"
 >
-  <form *nzDrawerContent nz-form [formGroup]="form" (ngSubmit)="save()" class="form">
+  <form *nzDrawerContent nz-form [formGroup]="form" (ngSubmit)="onSave()" class="form">
     <ng-container *ngFor="let metadata of columnsMetadata; index as i">
       <div class="group" [formGroupName]="metadata.fieldCode">
         <span>{{metadata.name}}</span>
@@ -25,6 +25,5 @@
     </ng-container>
     <button nz-button nzType="primary" class="button">Save</button>
   </form>
-  <!--  <pre>{{publicationForm.valueChanges | async | json}}</pre>-->
 </nz-drawer>
 

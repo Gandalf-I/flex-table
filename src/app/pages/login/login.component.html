@@ -1,16 +1,16 @@
 <div class="login">
   <h1 class="title">Login</h1>
-  <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()" [nzDisableAutoTips]="true">
+  <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm()" [nzDisableAutoTips]="true">
     <nz-form-item>
       <nz-form-control [nzErrorTip]="'Invalid email!'"
-                       [nzHasFeedback]="!loginForm.errors?.email">
+                       [nzHasFeedback]="!form.errors?.email">
         <nz-input-group nzPrefixIcon="mail">
           <input type="text" nz-input formControlName="email" placeholder="admin@admin.com"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your password!" [nzHasFeedback]="!loginForm.errors?.password">
+      <nz-form-control nzErrorTip="Please input your password!" [nzHasFeedback]="!form.errors?.password">
         <nz-input-group nzPrefixIcon="lock">
           <input type="password" nz-input formControlName="password" placeholder="admin"/>
         </nz-input-group>

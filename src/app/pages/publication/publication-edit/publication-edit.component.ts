@@ -13,10 +13,9 @@ import moment from 'moment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PublicationEditComponent implements OnInit {
-  form: FormGroup;
+  form!: FormGroup;
   fields: FieldWithMetadata[] = [];
-
-  publication: Publication;
+  publication!: Publication;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -24,22 +23,26 @@ export class PublicationEditComponent implements OnInit {
               private publicationService: PublicationService,
               private message: NzMessageService,
   ) {
-    this.form = this.fb.group({});
+  }
 
+  ngOnInit(): void {
+    if (!this.fields?.length) {
+      this.onClose();
+      return;
+    }
+
+    this.init();
+    this.initForm();
+  }
+
+  private init() {
     const { id } = this.route.snapshot.params;
     this.publication = this.publicationService.getPublication(+id);
     this.fields = this.publicationService.getPublicationFieldsWithMetadata(+id);
   }
 
-  ngOnInit(): void {
-    if (!this.fields?.length) {
-      this.close();
-      return;
-    }
-    this.initForm();
-  }
-
-  initForm(): void {
+  private initForm(): void {
+    this.form = this.fb.group({});
     for (const field of this.fields) {
       if (!field) {
         continue;
@@ -55,7 +58,7 @@ export class PublicationEditComponent implements OnInit {
     }
   }
 
-  getValidators(field: FieldWithMetadata) {
+  public getValidators(field: FieldWithMetadata) {
     const validators = [];
 
     if (field?.isMandatory) {
@@ -65,7 +68,7 @@ export class PublicationEditComponent implements OnInit {
     return validators;
   }
 
-  save() {
+  public onSave() {
     for (const i in this.form.controls) {
       this.form.controls[i].markAsDirty();
       this.form.controls[i].updateValueAndValidity();
@@ -81,7 +84,7 @@ export class PublicationEditComponent implements OnInit {
     this.publicationService.putPublication(editedPublication);
 
     this.message.success('Complete save!');
-    this.close();
+    this.onClose();
   }
 
   getEdited(): Publication {
@@ -98,12 +101,10 @@ export class PublicationEditComponent implements OnInit {
         },
       );
 
-    console.log('Send', this.publication);
-
     return this.publication;
   }
 
-  close() {
+  onClose() {
     this.router.navigate(['../']);
   }
 }
